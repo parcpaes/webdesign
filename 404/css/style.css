@@ -1,0 +1,128 @@
+/* font-family: 'Montserrat', sans-serif;
+  font-family: 'Space Mono', monospace; */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --clr-primary: #333333;
+  --fw-bold: 700;
+  --fw-normal: 400;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 1.125rem;
+  color: #4f4f4f;
+  line-height: 1.48;
+}
+
+header {
+  margin-bottom: 3rem;
+  margin-top: 0.75rem;
+}
+figure {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.errorInfo {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.errorInfo__status {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--clr-primary);
+}
+.errorInfo__img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.errorInfo__section {
+  max-width: 42ch;
+  display: flex;
+  flex-direction: column;
+}
+
+.errorInfo__title {
+  font-weight: var(--fw-bold);
+  font-size: 3rem;
+  color: var(--clr-primary);
+  margin-top: 0;
+}
+.errorInfo__desc {
+  margin-bottom: 4rem;
+  max-width: 32ch;
+}
+
+.footer {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #bdbdbd;
+}
+.footer p {
+  padding: 1em 0;
+  text-align: center;
+}
+
+.btn {
+  text-decoration: none;
+  background-color: var(--clr-primary);
+  text-transform: uppercase;
+  font-weight: var(--fw-bold);
+  padding: 1em 2.5em;
+}
+
+.btn--primary {
+  background-color: var(--clr-primary);
+  color: white;
+  max-width: 15rem;
+}
+.btn--primary:hover {
+  background-color: #1f1f1f;
+  color: whitesmoke;
+}
+
+@media (min-width: 768px) {
+  .errorInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(auto-fit, 1fr);
+    height: 100vh;
+    padding-top: 0;
+    margin-bottom: 0;
+  }
+  .footer {
+    grid-column: 1/-1;
+    justify-self: center;
+    align-self: end;
+  }
+  header {
+    grid-column: 1/-1;
+  }
+  figure {
+    grid-column: 1/2;
+    justify-self: start;
+  }
+
+  .errorInfo__section {
+    grid-column: 2/-1;
+    align-self: center;
+    max-width: 42ch;
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .errorInfo__desc {
+    max-width: 30ch;
+  }
+}
