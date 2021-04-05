@@ -1,0 +1,122 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  --clr-cyan: hsl(185, 75%, 39%);
+  --clr-dark-blue: hsl(229, 23%, 23%);
+  --clr-dark-grayish: hsl(227, 10%, 46%);
+  --clr-dark-gray: hsl(0, 0%, 59%);
+  --fs-16: 1rem;
+  --fw-400: 400;
+  --fw-700: 700;
+}
+body {
+  font-family: 'Kumbh Sans', sans-serif;
+  font-size: var(--fs-18);
+  font-weight: var(--fw-400);
+  color: var(--clr-dark-blue);
+  margin: 0;
+}
+.container {
+  background-color: var(--clr-cyan);
+
+  display: flex;
+  height: 100vh;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+  position: relative;
+  padding: 1em;
+  z-index: 0;
+}
+.container::before {
+  content: url(../images/bg-pattern-top.svg);
+  display: block;
+  position: absolute;
+  transform: translate(-50%, -38%);
+  z-index: -1;
+}
+.container::after {
+  content: url(../images/bg-pattern-bottom.svg);
+  display: block;
+  position: absolute;
+  transform: translate(50%, 50%);
+  z-index: -1;
+}
+.profile {
+  background: white;
+  border-radius: 1em;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.profile__image {
+  border-radius: 100%;
+  border: 5px solid white;
+}
+.profile__header {
+  margin-bottom: 2.75em;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.profile__description {
+  text-align: center;
+  padding: 0.75em 0;
+}
+.stats {
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  padding: 1.75em 0;
+}
+
+.profile__header + img {
+  width: 100%;
+  object-fit: cover;
+}
+.profile__header .profile__image {
+  position: absolute;
+  bottom: -36%;
+}
+
+.profile__description .number {
+  font-weight: var(--fw-400);
+  color: var(--fg, var(--clr-dark-gray));
+}
+.profile__description .name {
+  font-weight: var(--fw-700);
+  font-size: 1.25rem;
+  margin-bottom: 0;
+}
+.profile__description .city {
+  color: var(--fg, var(--clr-dark-gray));
+}
+
+.stats__rate p,
+h2 {
+  margin: 0;
+}
+.stats__rate h2 {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+}
+
+.stats__rate p {
+  font-size: 0.75rem;
+  color: var(--fg, var(--clr-dark-gray));
+  margin-top: 0.5em;
+}
+
+.attribution {
+  flex-basis: 100%;
+  text-align: center;
+}
+
+.attribution a:hover {
+  color: lightgray;
+}
