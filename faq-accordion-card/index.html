@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ CARDS</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <aside class="container flex">
+      <section class="card-faq flex">
+        <picture class="card-faq__image flex">
+          <source
+            media="(min-width:1024px)"
+            srcset="./images/illustration-woman-online-desktop.svg"
+          />
+          <source
+            media="(max-width:1025px)"
+            srcset="./images/illustration-woman-online-mobile.svg"
+          />
+          <img src="./images/illustration-woman-online-mobile.svg" alt="" />
+        </picture>
+        <div class="fqa">
+          <h1 class="title">FQA</h1>
+          <ul class="question__item">
+            <a class="question">
+              How many team members can I invite?
+              <span class="arrow-icon"></span>
+            </a>
+            <li class="answer">
+              <p>
+                You can invite up to 2 additional users on the Free plan. There
+                is no limit on team members for the Premium plan.
+              </p>
+            </li>
+          </ul>
+          <ul class="question__item">
+            <a class="question"
+              >What is the maximum file upload size?
+              <span class="arrow-icon"></span>
+            </a>
+            <li class="answer">
+              <p>
+                No more than 2GB. All files in your account must fit your
+                allotted storage space.
+              </p>
+            </li>
+          </ul>
+          <ul class="question__item">
+            <a class="question">
+              How do I reset my password?
+              <span class="arrow-icon"></span>
+            </a>
+            <li class="answer">
+              <p>
+                Click “Forgot password” from the login page or “Change password”
+                from your profile page. A reset link will be emailed to you.
+              </p>
+            </li>
+          </ul>
+          <ul class="question__item">
+            <a class="question">
+              Can I cancel my subscription?
+              <span class="arrow-icon"></span>
+            </a>
+            <li class="answer">
+              <p>
+                Yes! Send us a message and we’ll process your request no
+                questions asked.
+              </p>
+            </li>
+          </ul>
+          <ul class="question__item">
+            <a class="question">
+              Do you provide additional support?
+              <span class="arrow-icon"></span>
+            </a>
+            <li class="answer">
+              <p>
+                Chat and email support is available 24/7. Phone lines are open
+                during normal business hours.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </aside>
+    <script src="./script/index.js"></script>
+  </body>
+</html>

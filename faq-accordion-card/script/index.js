@@ -1,77 +1,80 @@
-class ToggleQuestion {
-  constructor(listItems) {
-    this.listItems = listItems;
+class ToggleStyle {
+  constructor(selector, toggleSelector) {
+    this.selector = selector;
+    this.toggleSelector = toggleSelector;
+    this.questionItem = {};
   }
-
-  toggleItemParagraph(items, selector) {
-    const answers = items.querySelectorAll('.answer');
-    const p = answers.find((value) => value.classList.contains(selector));
-    p.classList.toggle(selector);
+  toggleStyle(parent) {
+    this.questionItem = parent.querySelector(this.selector);
+    this.questionItem.classList.toggle(this.toggleSelector);
   }
-  togglePropertyStyle(items, selector) {
-    const questions = items.querySelectorAll('.question');
-    const arrowImage = questions.find((value) =>
-      value.style.getPropertyValue('rotate(180deg)')
-    );
-    arrowImage.style.setProperty('--image-rotate', 'rotate(0)');
-  }
-  togglePrevious(divItem, question, selector) {
-    if (this.isToggledPrevious(divItem, this.prevActiveItem, selector)) {
-      this.prevActiveItem.classList.toggle(selector);
-      this.prevUpDownArrow.style.setProperty(
-        '--image-rotate',
-        this.isToggleRotated()
-      );
-      this.isRotated = !this.isRotated;
-    }
-    this.setPrevActive(divItem, question);
-  }
-  toggleItem(divItem, selector) {
-    const answer = divItem.querySelector('.answer');
-    const question = divItem.querySelector('.question');
-
-    this.togglePrevious(answer, question, selector);
-    question.style.setProperty('--image-rotate', this.isToggleRotated());
-
-    this.isRotated = !this.isRotated;
-    answer.classList.toggle(selector);
-  }
-
-  isToggleRotated() {
-    return this.isRotated ? 'rotate(0deg)' : 'rotate(180deg)';
-  }
-  setPrevActive(actualItem, question) {
-    this.prevActiveItem = actualItem;
-    this.prevUpDownArrow = question;
-  }
-
-  isToggledPrevious(actualItem, prevItem, selector) {
-    return (
-      prevItem &&
-      prevItem.classList.contains(selector) &&
-      prevItem !== actualItem
-    );
+  isStyled() {
+    const itemStyle = this.questionItem.classList;
+    return itemStyle.contains(this.toggleSelector);
   }
 }
 
-class Question {
-  constructor(mainSelector, toggleQuestion) {
-    this.questionsContent = mainSelector;
-    this.toggleQuestion = toggleQuestion;
-    this.questionsContent.onclick = this.clickQuestion.bind(this);
+class ItemsToggle {
+  constructor(question) {
+    this.question = question;
   }
 
-  clickQuestion(event) {
-    const divItem = event.target.closest('div');
-    if (this.isEqualClassName(divItem, this.questionsContent)) return;
-    this.toggleQuestion.toggleItem(divItem, 'active');
+  toggleItems(currentElement) {
+    Object.keys(this.question).forEach((key) =>
+      this.question[key].toggleStyle(currentElement)
+    );
   }
-
-  isEqualClassName(element1, element2) {
-    return element1.className === element2.className;
+  isItemsStyled() {
+    return Object.keys(this.question).every((key) =>
+      this.question[key].isStyled()
+    );
   }
 }
-const questions = document.querySelector('.questions');
-const question_items = questions.querySelector('.question__item');
-const toggleQuestion = new ToggleQuestion(question_items);
-const question = new Question(questions, toggleQuestion);
+const questionToggleStyle = new ToggleStyle('.question', 'active');
+const arrowToggleStyle = new ToggleStyle('.arrow-icon', 'arrow-up');
+const answerToggleStyle = new ToggleStyle('.answer', 'active');
+
+const question = {
+  questionToggleStyle,
+  arrowToggleStyle,
+  answerToggleStyle,
+};
+const toggles = new ItemsToggle(question);
+
+function useStateToggle(toggles) {
+  let previousItem, prevToggle;
+  return {
+    toggle: function (actualItem) {
+      if (
+        this.isSameAsPrevItem(actualItem, previousItem) &&
+        this.isStyled(prevToggle)
+      ) {
+        prevToggle.toggleItems(previousItem);
+      }
+      toggles.toggleItems(actualItem);
+      previousItem = actualItem;
+      prevToggle = toggles;
+    },
+    isSameAsPrevItem: function (actual, prev) {
+      return prev && prev !== actual;
+    },
+    isStyled: function (toggles) {
+      return toggles && toggles.isItemsStyled();
+    },
+  };
+}
+
+const toggleState = useStateToggle(toggles);
+
+const fqa = document.querySelector('.fqa');
+fqa.addEventListener('click', (event) => {
+  const paragraph = event.target;
+  const questionItem = event.target.closest('.question__item');
+  if (!questionItem || paragraph.tagName === 'P') return;
+
+  toggleState.toggle(questionItem);
+});
+
+function isToggledPrevious(actualItem, prevItem) {
+  return prevItem && prevItem !== actualItem;
+}
